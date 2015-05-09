@@ -42,6 +42,19 @@
 			<div class="content">
 				<div class="title">Laravel 5</div>
 				<div class="quote">Hello {{ $first_name }} {{ $last_name }}</div>
+			
+
+				<h1>Categories</h1>
+		
+				<ul>
+					@foreach($categories as $category)
+						<li>
+							{{$category->name}}
+						</li>
+					@endforeach
+				</ul>
+
+
 			</div>
 		</div>
 	</body>
