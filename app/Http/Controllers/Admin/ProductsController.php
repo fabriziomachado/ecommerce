@@ -4,7 +4,7 @@ use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use CodeCommerce\models\Product;
+use CodeCommerce\Models\Product;
 
 class ProductsController extends Controller {
 

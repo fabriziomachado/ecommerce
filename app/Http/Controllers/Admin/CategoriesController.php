@@ -4,7 +4,7 @@ use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use CodeCommerce\models\Category;
+use CodeCommerce\Models\Category;
 
 class CategoriesController extends Controller {
 
