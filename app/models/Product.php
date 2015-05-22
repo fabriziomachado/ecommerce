@@ -7,7 +7,15 @@ class Product extends Model {
     protected $fillable = [
         'name',
         'description',
-        'price'
+        'price',
+        'featured',
+        'recommend',
+        'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo('CodeCommerce\Models\Category');
+    }
 
 }
