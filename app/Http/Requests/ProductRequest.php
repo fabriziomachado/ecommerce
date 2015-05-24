@@ -25,7 +25,6 @@ class ProductRequest extends Request {
             'description' => 'required',
             'price' => 'required',
             'category_id' => 'required',
-
         ];
     }
 

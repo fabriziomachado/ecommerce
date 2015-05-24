@@ -34,8 +34,8 @@ class ProductsController extends Controller {
 	{
         $params = $request->all();
 
-        $params['featured'] = array_key_exists('featured', $params)?:'0';
-        $params['recommend'] = array_key_exists('recommend', $params)?:'0';
+        $params['featured'] = $request->get('featured',0);
+        $params['recommend'] = $request->get('recommend', 0);
 
         $this->product->create($params);
 
@@ -61,8 +61,8 @@ class ProductsController extends Controller {
 	{
         $params = $request->all();
 
-        $params['featured'] = array_key_exists('featured', $params)?:'0';
-        $params['recommend'] = array_key_exists('recommend', $params)?:'0';
+        $params['featured'] = $request->get('featured',0);
+        $params['recommend'] = $request->get('recommend', 0);
 
         $this->product->find($id)->update($params);
 

@@ -24,7 +24,7 @@
                 <tr>
                     <td>{{ $product->id  }}</td>
                     <td>
-                        <a href="{{ route('products.show',['id'=>$product->id])  }}" class="">{{ $product->name  }}</a>
+                        <a href="{{ route('products.edit',['id'=>$product->id])  }}" class="">{{ $product->name  }}</a>
                     </td>
                     <td>{{ str_limit($product->description, $limit=100, $end='...') }}</td>
                     <td>{{ $product->price  }}</td>
