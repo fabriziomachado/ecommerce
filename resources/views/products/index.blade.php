@@ -39,5 +39,8 @@
             @endforeach
             </tbody>
         </table>
+
+        {!! $products->render() !!}
+
     </div>
 @endsection

@@ -1,11 +1,11 @@
 <?php namespace CodeCommerce\Http\Controllers\Admin;
 
-use CodeCommerce\Http\Requests;
-use CodeCommerce\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use CodeCommerce\Models\Category;
 use Illuminate\Support\Facades\Redirect;
+
+use CodeCommerce\Http\Controllers\Controller;
+use CodeCommerce\Http\Requests\CategoryRequest;
+
+use CodeCommerce\Models\Category;
 
 class CategoriesController extends Controller {
 
@@ -18,7 +18,7 @@ class CategoriesController extends Controller {
 
 	public function index()
 	{
-        $categories = $this->category->all();
+        $categories = $this->category->paginate(10);
 
         return view('categories.index', compact('categories'));
 
@@ -29,7 +29,7 @@ class CategoriesController extends Controller {
         return view('categories.create', compact('categories'));
 	}
 
-	public function store(Request $request)
+	public function store(CategoryRequest $request)
 	{
 		$params = $request->all();
         $this->category->create($params);
@@ -52,7 +52,7 @@ class CategoriesController extends Controller {
         return view('categories.edit', compact('category'));
 	}
 
-	public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
 	{
         $params = $request->all();
         $this->category->find($id)->update($params);
