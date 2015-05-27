@@ -76,4 +76,42 @@ class ProductsController extends Controller {
         return Redirect::route('products.index')->with('message', trans('app.product_deleted_with_sucess') );
 	}
 
+
+
+    // actions of images
+    public function images($id)
+    {
+        $product = $this->product->find($id);
+        return view('products.images', compact('product'));
+    }
+
+    public function createImage($id)
+    {
+        $product = $this->productModel->find($id);
+        return view('product.create_image', compact('product'));
+    }
+
+    public function storeImage(Requests\AdminProductImageRequest $request, $id, ProductImage $productImage)
+    {
+        $file = $request->file('image');
+        $extension = $file->getClientOriginalExtension();
+        $image = $productImage::create([
+            'product_id' => $id,
+            'extension' => $extension
+        ]);
+        Storage::disk('public_local')->put($image->id . '.' . $extension, File::get($file));
+        return redirect()->route('product.images', ['id' => $id]);
+    }
+    public function destroyImage(ProductImage $productImage, $id) {
+        $image = $productImage->find($id);
+        if(file_exists(public_path().'uploads/'.$image->id.'.'.$image->extension)) {
+            Storage::disk('public_local')->delete($image->id.'.'.$image->extension);
+        }
+        $product = $image->product;
+        $image->delete();
+        return redirect()->route('product.images',['id'=>$product->id]);
+    }
+
+
+
 }
