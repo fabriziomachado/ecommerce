@@ -32,6 +32,7 @@
                     <td>{!! liked_icon($product->featured) !!}</td>
                     <td>{!! liked_icon($product->recommend) !!}</td>
                     <td>
+                        <a href="{{ route('products.images',['id'=>$product->id])  }}" class="btn btn-xs btn-default">Images</a>
                         <a href="{{ route('products.edit',['id'=>$product->id])  }}" class="btn btn-xs btn-primary">Edit</a>
                         <a href="{{ route('products.destroy',['id'=>$product->id])  }}" class="btn btn-xs btn-danger" >Delete</a>
                     </td>

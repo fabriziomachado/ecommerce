@@ -32,6 +32,6 @@
 </div>
 
 <div class="form-group">
-    {!! Form::submit( $submit_button_text, ['class'=>'btn btn-primary'] ) !!}
+    {!! Form::submit($submit_button_text, ['class'=>'btn btn-primary']) !!}
     <a class="btn btn-default" href="{{ route('products.index') }}">{{ trans('app.back') }}</a>
 </div>

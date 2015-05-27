@@ -2,13 +2,17 @@
 
 use CodeCommerce\Http\Controllers\Controller;
 use CodeCommerce\Http\Requests\ProductRequest;
-
+use CodeCommerce\Http\Requests\ProductImageRequest;
 use CodeCommerce\Models\Category;
 use CodeCommerce\Models\Product;
+use CodeCommerce\Models\ProductImage;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
-class ProductsController extends Controller {
+class ProductsController extends Controller
+{
 
     private $product;
 
@@ -17,12 +21,12 @@ class ProductsController extends Controller {
         $this->product = $product;
     }
 
-	public function index()
-	{
+    public function index()
+    {
         $products = $this->product->paginate(10);
 
         return view('products.index', compact('products'));
-	}
+    }
 
     public function create(Product $product, Category $category)
     {
@@ -30,52 +34,51 @@ class ProductsController extends Controller {
         return view('products.create', compact('product', 'categories'));
     }
 
-	public function store(ProductRequest $request)
-	{
+    public function store(ProductRequest $request)
+    {
         $params = $request->all();
 
-        $params['featured'] = $request->get('featured',0);
+        $params['featured'] = $request->get('featured', 0);
         $params['recommend'] = $request->get('recommend', 0);
 
         $this->product->create($params);
 
-        return Redirect::route('products.index')->with('message', trans('app.product_created_with_sucess') );
+        return Redirect::route('products.index')->with('message', trans('app.product_created_with_sucess'));
 
 
-	}
+    }
 
-	public function show($id)
-	{
-		//
-	}
+    public function show($id)
+    {
+        //
+    }
 
-	public function edit($id, Category $category)
-	{
+    public function edit($id, Category $category)
+    {
         $product = $this->product->find($id);
         $categories = $category->lists('name', 'id');
 
         return view('products.edit', compact('product', 'categories'));
-	}
+    }
 
-	public function update(ProductRequest $request, $id)
-	{
+    public function update(ProductRequest $request, $id)
+    {
         $params = $request->all();
 
-        $params['featured'] = $request->get('featured',0);
+        $params['featured'] = $request->get('featured', 0);
         $params['recommend'] = $request->get('recommend', 0);
 
         $this->product->find($id)->update($params);
 
-        return Redirect::route('products.index')->with('message', trans('app.product_updated_with_sucess') );
+        return Redirect::route('products.index')->with('message', trans('app.product_updated_with_sucess'));
     }
 
-	public function destroy($id)
-	{
+    public function destroy($id)
+    {
         $this->product->find($id)->delete();
 
-        return Redirect::route('products.index')->with('message', trans('app.product_deleted_with_sucess') );
-	}
-
+        return Redirect::route('products.index')->with('message', trans('app.product_deleted_with_sucess'));
+    }
 
 
     // actions of images
@@ -87,31 +90,34 @@ class ProductsController extends Controller {
 
     public function createImage($id)
     {
-        $product = $this->productModel->find($id);
-        return view('product.create_image', compact('product'));
+        $product = $this->product->find($id);
+        return view('products.create_image', compact('product'));
     }
 
-    public function storeImage(Requests\AdminProductImageRequest $request, $id, ProductImage $productImage)
+    public function storeImage(ProductImageRequest $request, ProductImage $productImage, $id)
     {
         $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
-        $image = $productImage::create([
-            'product_id' => $id,
-            'extension' => $extension
-        ]);
+        $image = $productImage::create(['product_id' => $id, 'extension' => $extension]);
+
         Storage::disk('public_local')->put($image->id . '.' . $extension, File::get($file));
-        return redirect()->route('product.images', ['id' => $id]);
-    }
-    public function destroyImage(ProductImage $productImage, $id) {
-        $image = $productImage->find($id);
-        if(file_exists(public_path().'uploads/'.$image->id.'.'.$image->extension)) {
-            Storage::disk('public_local')->delete($image->id.'.'.$image->extension);
-        }
-        $product = $image->product;
-        $image->delete();
-        return redirect()->route('product.images',['id'=>$product->id]);
+
+        return redirect()->route('products.images', ['id' => $id])->with('message', 'Image uploaded with sucess');
     }
 
+    public function destroyImage(ProductImage $productImage, $id)
+    {
+        $image = $productImage->find($id);
+
+        if (file_exists(public_path('uploads') . $image->id . '.' . $image->extension)) {
+            Storage::disk('public_local')->delete($image->id . '.' . $image->extension);
+        }
+
+        $product = $image->product;
+        $image->delete();
+
+        return redirect()->route('products.images', ['id' => $product->id])->with('message', 'Image deleted with sucess');
+    }
 
 
 }
