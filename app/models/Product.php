@@ -13,9 +13,14 @@ class Product extends Model {
         'category_id'
     ];
 
+    // relationships
     public function category()
     {
         return $this->belongsTo('CodeCommerce\Models\Category');
+    }
+
+    public function images(){
+        return $this->hasMany('Codecommerce\models\ProductImage');
     }
 
 }

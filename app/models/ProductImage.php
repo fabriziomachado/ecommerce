@@ -1,9 +1,17 @@
-<?php namespace CodeCommerce;
+<?php namespace CodeCommerce\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductImage extends Model {
+class ProductImage extends Model
+{
+    protected $fillable = [
+        'product_id',
+        'extension'
+    ];
 
-	//
+    public function product()
+    {
+        return $this->belongsTo('CodeCommerce\Model\Product');
+    }
 
 }
