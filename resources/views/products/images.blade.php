@@ -21,8 +21,7 @@
                 <tr>
                     <td>{{ $image->id  }}</td>
                     <td>
-                        {{ asset('uploads/'.$image->id.'.'.$image->extension, 'product image', array('width' => '80px')) }}
-                    </td>
+                        <img src="{{ asset('uploads/'.$image->id.'.'.$image->extension) }}" width="80px"></td>
                     <td>{{ $image->extension }}</td>
                     <td>
                         <a href="{{ route('products.images.destroy',['id'=>$image->id]) }}" class="btn btn-xs btn-danger">Delete</a>
