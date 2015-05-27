@@ -11,7 +11,7 @@ class ProductImage extends Model
 
     public function product()
     {
-        return $this->belongsTo('CodeCommerce\Model\Product');
+        return $this->belongsTo('CodeCommerce\Models\Product');
     }
 
 }

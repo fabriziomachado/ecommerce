@@ -20,7 +20,7 @@ class Product extends Model {
     }
 
     public function images(){
-        return $this->hasMany('Codecommerce\models\ProductImage');
+        return $this->hasMany('CodeCommerce\Models\ProductImage');
     }
 
 }
