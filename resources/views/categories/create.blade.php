@@ -6,7 +6,7 @@
 
     @include('errors.list')
 
-    {!! Form::open(['route'=>'categories.store']) !!}
+    {!! Form::model($category, ['route'=>'categories.store', 'method'=>'post']) !!}
         @include('categories._form',['submit_button_text' => trans('app.create_category')])
     {!! Form::close() !!}
 

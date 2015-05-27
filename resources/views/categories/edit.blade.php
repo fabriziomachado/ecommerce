@@ -6,7 +6,7 @@
 
     @include('errors.list')
 
-    {!! Form::model($category, ['route'=>['categories.update', $category->id], 'method'=>'put']) !!}
+    {!! Form::model($category, ['route'=>['categories.update', $category->id], 'method'=>'patch']) !!}
         @include('categories._form', ['submit_button_text' => trans('app.update_category')])
     {!! Form::close() !!}
 

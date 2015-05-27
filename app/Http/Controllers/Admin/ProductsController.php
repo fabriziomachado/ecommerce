@@ -24,10 +24,10 @@ class ProductsController extends Controller {
         return view('products.index', compact('products'));
 	}
 
-    public function create(Category $category)
+    public function create(Product $product, Category $category)
     {
         $categories = $category->lists('name', 'id');
-        return view('products.create', compact('categories'));
+        return view('products.create', compact('product', 'categories'));
     }
 
 	public function store(ProductRequest $request)
