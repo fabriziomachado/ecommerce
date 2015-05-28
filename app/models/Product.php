@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model {
+class Product extends Model
+{
 
     protected $fillable = [
         'name',
@@ -19,8 +20,13 @@ class Product extends Model {
         return $this->belongsTo('CodeCommerce\Models\Category');
     }
 
-    public function images(){
+    public function images()
+    {
         return $this->hasMany('CodeCommerce\Models\ProductImage');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('CodeCommerce\Models\Tag');
+    }
 }
