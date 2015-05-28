@@ -29,4 +29,19 @@ class Product extends Model
     {
         return $this->belongsToMany('CodeCommerce\Models\Tag');
     }
+
+    // use $product->name_description
+    public function getNameDescriptionAttribute()
+    {
+        return $this->name . " - " . $this->description;
+    }
+
+    // use $product->tag_list
+    public function getTagListAttribute()
+    {
+        $tags = $this->tags->lists('name');
+
+        return implode(',', $tags);
+    }
+
 }

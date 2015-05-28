@@ -3,9 +3,11 @@
 use CodeCommerce\Http\Controllers\Controller;
 use CodeCommerce\Http\Requests\ProductRequest;
 use CodeCommerce\Http\Requests\ProductImageRequest;
+
 use CodeCommerce\Models\Category;
 use CodeCommerce\Models\Product;
 use CodeCommerce\Models\ProductImage;
+use CodeCommerce\Models\Tag;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
@@ -41,7 +43,10 @@ class ProductsController extends Controller
         $params['featured'] = $request->get('featured', 0);
         $params['recommend'] = $request->get('recommend', 0);
 
-        $this->product->create($params);
+        $product = $this->product->create($params);
+
+        //$product->tags()->sync($this->storeTags($request->input('tag_list')));
+        $this->syncTags($product, $params['tag_list']);
 
         return Redirect::route('products.index')->with('message', trans('app.product_created_with_sucess'));
 
@@ -68,19 +73,23 @@ class ProductsController extends Controller
         $params['featured'] = $request->get('featured', 0);
         $params['recommend'] = $request->get('recommend', 0);
 
-        $this->product->find($id)->update($params);
+        $product = $this->product->find($id);
+        $product->update($params);
+
+        $this->syncTags($product, $params['tag_list']);
 
         return Redirect::route('products.index')->with('message', trans('app.product_updated_with_sucess'));
     }
 
     public function destroy($id)
     {
-        $this->product->find($id)->delete();
+        $product = $this->product->find($id);
+        $product->tags()->sync([]);
+        $product->delete();
 
         return Redirect::route('products.index')->with('message', trans('app.product_deleted_with_sucess'));
     }
-
-
+    
     // actions of images
     public function images($id)
     {
@@ -117,6 +126,18 @@ class ProductsController extends Controller
         $image->delete();
 
         return redirect()->route('products.images', ['id' => $product->id])->with('message', 'Image deleted with sucess');
+    }
+
+    // privates
+    private function syncTags(Product $product, $tags)
+    {
+        $tags = explode(',', $tags);
+        foreach ($tags as $tag) {
+            $tag_id = Tag::firstOrCreate(['name'=> trim($tag)])->id;
+            $tag_ids[] =  $tag_id;
+        }
+
+        $product->tags()->sync($tag_ids);
     }
 
 

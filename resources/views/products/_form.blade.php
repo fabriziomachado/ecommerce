@@ -20,6 +20,11 @@
     {!! Form::text('price', null, ['class'=>'form-control']) !!}
 </div>
 
+<div class="form-group">
+    {!! Form::label('tags', 'Tags:') !!}
+    {!! Form::textarea('tag_list', null, ['class'=>'form-control']) !!}
+</div>
+
 <div class="checkbox-inline">
     <label for="featured">
         {!! Form::checkbox('featured', 1, true) !!} Featured
