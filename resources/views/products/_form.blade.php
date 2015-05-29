@@ -22,7 +22,7 @@
 
 <div class="form-group">
     {!! Form::label('tags', 'Tags:') !!}
-    {!! Form::textarea('tag_list', null, ['class'=>'form-control']) !!}
+    {!! Form::text('tag_list', null, ['class'=>'form-control']) !!}
 </div>
 
 <div class="checkbox-inline">

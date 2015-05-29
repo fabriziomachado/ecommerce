@@ -44,12 +44,9 @@ class ProductsController extends Controller
         $params['recommend'] = $request->get('recommend', 0);
 
         $product = $this->product->create($params);
-
-        //$product->tags()->sync($this->storeTags($request->input('tag_list')));
-        $this->syncTags($product, $params['tag_list']);
+        $product->tag_list = $params['tag_list'];
 
         return Redirect::route('products.index')->with('message', trans('app.product_created_with_sucess'));
-
 
     }
 
@@ -74,9 +71,8 @@ class ProductsController extends Controller
         $params['recommend'] = $request->get('recommend', 0);
 
         $product = $this->product->find($id);
+        $product->tag_list = $params["tag_list"];
         $product->update($params);
-
-        $this->syncTags($product, $params['tag_list']);
 
         return Redirect::route('products.index')->with('message', trans('app.product_updated_with_sucess'));
     }
@@ -84,12 +80,17 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         $product = $this->product->find($id);
-        $product->tags()->sync([]);
+        $product->tags()->detach();
         $product->delete();
 
         return Redirect::route('products.index')->with('message', trans('app.product_deleted_with_sucess'));
     }
-    
+
+
+
+
+
+
     // actions of images
     public function images($id)
     {
@@ -127,18 +128,4 @@ class ProductsController extends Controller
 
         return redirect()->route('products.images', ['id' => $product->id])->with('message', 'Image deleted with sucess');
     }
-
-    // privates
-    private function syncTags(Product $product, $tags)
-    {
-        $tags = explode(',', $tags);
-        foreach ($tags as $tag) {
-            $tag_id = Tag::firstOrCreate(['name'=> trim($tag)])->id;
-            $tag_ids[] =  $tag_id;
-        }
-
-        $product->tags()->sync($tag_ids);
-    }
-
-
 }

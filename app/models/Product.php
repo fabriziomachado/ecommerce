@@ -11,7 +11,8 @@ class Product extends Model
         'price',
         'featured',
         'recommend',
-        'category_id'
+        'category_id',
+        'tag_lis'
     ];
 
     // relationships
@@ -42,6 +43,22 @@ class Product extends Model
         $tags = $this->tags->lists('name');
 
         return implode(',', $tags);
+    }
+
+    // use $product->tag_list = "tag1,tag2,tag3"
+    public function setTagListAttribute($tags)
+    {
+        if(trim($tags)=="") return false;
+
+        $tags = explode(',', $tags);
+        foreach ($tags as $tag) {
+            $tag_id = Tag::firstOrCreate(['name'=> trim($tag)])->id;
+            $tag_ids[] =  $tag_id;
+        }
+
+        $this->tags()->sync($tag_ids);
+
+        return true;
     }
 
 }
