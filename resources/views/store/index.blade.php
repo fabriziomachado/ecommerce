@@ -4,8 +4,13 @@
     <div class="col-sm-3">
         <div class="left-sidebar">
             <h2>Categories</h2>
+            <!--categories-products-->
+            <div class="panel-group category-products" id="accordian">
 
-            @include('store.categories.list')
+                @each('store.categories.item', $categories, 'category', 'store.categories.no-items')
+
+            </div>
+            <!--categories-products-->
 
         </div>
     </div>
@@ -14,37 +19,35 @@
 @section('content')
     <div class="col-sm-9 padding-right">
 
-        @if(isset($products_featureds))
+        @if(isset($products_featureds) AND $products_featureds->count() > 0)
             <!--features_items-->
             <div class="features_items">
                 <h2 class="title text-center">Em destaque</h2>
 
-                @include('store.products.list', ['products' => $products_featureds])
+                @each('store.products.item', $products_featureds, 'product', 'store.products.no-items')
 
             </div>
-            <!--features_items-->
-        @endif
+            <!--features_items--
 
-        @if(isset($products_recommendeds))
+        @elseif(isset($products_recommendeds) AND $products_recommendeds->count() > 0)
             <!--recommended-->
             <div class="features_items">
                 <h2 class="title text-center">Recomendados</h2>
 
-                @include('store.products.list', ['products' => $products_recommendeds])
+                @each('store.products.item', $products_recommendeds, 'product', 'store.products.no-items')
 
             </div>
             <!--recommended-->
-        @endif
-
-
-        @if(isset($products) AND $products->count() > 0)
+        @elseif(isset($products) AND $products->count() > 0)
             <div class="features_items"><!--all_items-->
                 <h2 class="title text-center">Products of Category: {{ $products->first()->category->name }} </h2>
 
-                @include('store.products.list', ['products' => $products ])
+                @each('store.products.item', $products, 'product', 'store.products.no-items')
 
             </div>
             <!--all_items-->
+        @else
+            @include('store.products.no-items')
         @endif
 
 
