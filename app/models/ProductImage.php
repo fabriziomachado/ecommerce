@@ -14,4 +14,12 @@ class ProductImage extends Model
         return $this->belongsTo('CodeCommerce\Models\Product');
     }
 
+
+    // use $productImage->file
+    public function getPhotoAttribute()
+    {
+        return $this->id .".". $this->extension;
+    }
+
+
 }

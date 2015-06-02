@@ -7,8 +7,8 @@
             <p>{{ $category->description }}</p>
 
             <p>
-                <a href="{{ route('category.edit',['id'=>$category->id])  }}" class="btn btn-primary">Edit</a>
-                <a href="{{ route('category.destroy',['id'=>$category->id])  }}" class="btn btn-danger" >Delete</a>
+                <a href="{{ route('categories',['id'=>$category->id])  }}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('categories',['id'=>$category->id])  }}" class="btn btn-danger" >Delete</a>
             </p>
 
         </div>

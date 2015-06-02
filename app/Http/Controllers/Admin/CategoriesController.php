@@ -26,7 +26,7 @@ class CategoriesController extends Controller {
 
 	public function create(Category $category)
 	{
-        return view('categories.create', compact('category'));
+        return view('categories.create', compact('categories'));
 	}
 
 	public function store(CategoryRequest $request)
@@ -41,7 +41,7 @@ class CategoriesController extends Controller {
 	{
 		$category = $this->category->find($id);
 
-        return view('categories.show', compact('category'));
+        return view('categories.show', compact('categories'));
 
 	}
 
@@ -49,7 +49,7 @@ class CategoriesController extends Controller {
 	{
         $category = $this->category->find($id);
 
-        return view('categories.edit', compact('category'));
+        return view('categories.edit', compact('categories'));
 	}
 
     public function update(CategoryRequest $request, $id)

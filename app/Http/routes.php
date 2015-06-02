@@ -50,10 +50,18 @@ Route::group(['namespace' => 'Admin'], function() {
 
 });
 
+Route::get('/', 'StoreController@index');
+Route::get('categories/{id}', ['as' => 'categories', 'uses' => 'StoreController@category']);
+Route::get('product/{id}', ['as' => 'product', 'uses' => 'StoreController@product']);
+Route::get('cart', ['as' => 'cart', 'uses' => 'CartController@index']);
+Route::get('cart/add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@add']);
+Route::get('cart/destroy/{id}', ['as' => 'cart.destroy', 'uses' => 'CartController@destroy']);
 
-Route::get('/', 'HomeController@index');
-Route::get('example', 'WelcomeController@example');
-Route::get('home', 'HomeController@index');
+
+
+//Route::get('/', 'HomeController@index');
+//Route::get('example', 'WelcomeController@example');
+//Route::get('home', 'HomeController@index');
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
