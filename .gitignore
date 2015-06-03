@@ -3,3 +3,4 @@
 .env
 .idea/*
 storage/database.sqlite
+npm-debug.log
