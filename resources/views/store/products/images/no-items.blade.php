@@ -1,0 +1,1 @@
+<a href="#"><img src="{{ asset('uploads/no-img.jpg') }}" alt="" width="80"></a>

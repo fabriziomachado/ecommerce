@@ -38,6 +38,14 @@
 
             </div>
             <!--recommended-->
+        @elseif(isset($tag) AND $products->count() > 0)
+            <div class="features_items"><!--all_items-->
+                <h2 class="title text-center">Products of Tag: {{ $tag->name }} </h2>
+
+                @each('store.products.item', $products, 'product', 'store.products.no-items')
+
+            </div>
+            <!--all_items-->
         @elseif(isset($products) AND $products->count() > 0)
             <div class="features_items"><!--all_items-->
                 <h2 class="title text-center">Products of Category: {{ $products->first()->category->name }} </h2>
@@ -45,7 +53,6 @@
                 @each('store.products.item', $products, 'product', 'store.products.no-items')
 
             </div>
-            <!--all_items-->
         @else
             @include('store.products.no-items')
         @endif

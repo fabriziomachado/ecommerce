@@ -4,3 +4,5 @@
 .idea/*
 storage/database.sqlite
 npm-debug.log
+
+app/Http/Controllers/StoreController.php
