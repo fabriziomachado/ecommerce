@@ -49,7 +49,7 @@ class CategoriesController extends Controller {
 	{
         $category = $this->category->find($id);
 
-        return view('categories.edit', compact('categories'));
+        return view('categories.edit', compact('category'));
 	}
 
     public function update(CategoryRequest $request, $id)
