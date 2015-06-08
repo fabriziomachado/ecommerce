@@ -49,7 +49,7 @@
 
                     <p>{{ $product->description }}</p>
                     <span>
-                        <span>R$ {{ money_format('%i', $product->price) }}</span>
+                        <span>R$ {{ number_format($product->price, 2, ',', '.') }}</span>
                             <a href="{{ route('cart.add', ['id' => $product->id]) }}" class="btn btn-fefault cart">
                                 <i class="fa fa-shopping-cart"></i>
                                 Adicionar no Carrinho

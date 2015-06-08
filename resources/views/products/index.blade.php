@@ -27,7 +27,7 @@
                         <a href="{{ route('products.edit',['id'=>$product->id])  }}" class="">{{ $product->name  }}</a>
                     </td>
                     <td>{{ str_limit($product->description, $limit=100, $end='...') }}</td>
-                    <td>{{ $product->price  }}</td>
+                    <td>{{ number_format($product->price, 2, ',', '.') }}</td>
                     <td>{{ $product->category->name  }}</td>
                     <td>{!! liked_icon($product->featured) !!}</td>
                     <td>{!! liked_icon($product->recommend) !!}</td>

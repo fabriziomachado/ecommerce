@@ -5,7 +5,7 @@
 
                 {!! first_image_of($product) !!}
 
-                <h2>R$ {{ $product->price }}</h2>
+                <h2>R$ {{ number_format($product->price, 2, ',', '.') }}</h2>
 
                 <p>{{ $product->name }}</p>
 
@@ -18,7 +18,7 @@
             </div>
             <div class="product-overlay">
                 <div class="overlay-content">
-                    <h2>R$ {{ $product->price }}</h2>
+                    <h2>R$ {{ number_format($product->price, 2, ',', '.') }}</h2>
 
                     <p>{{ $product->name }}</p>
                     <a href="{{ route('product', ['id' => $product->id]) }}" class="btn btn-default add-to-cart"><i
