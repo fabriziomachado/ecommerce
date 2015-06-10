@@ -1,5 +1,9 @@
 <?php namespace CodeCommerce\Http\Controllers;
 
+
+use Illuminate\Contracts\Routing\ResponseFactory;
+
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use CodeCommerce\Http\Requests;
 
@@ -20,7 +24,7 @@ class CartController extends Controller
         if (!Session::has('cart')) {
             Session::set('cart', $this->cart);
         }
-//dd(Session::get('cart'));
+
         return view('store.cart', ['cart' => Session::get('cart')]);
     }
 
@@ -44,6 +48,21 @@ class CartController extends Controller
         $cart->remove($id);
         Session::set('cart', $cart);
         return redirect()->route('cart');
+    }
+
+    public function update($id, $qtd)
+    {
+        $cart = $this->getCart();
+
+        $product = Product::find($id);
+        $cart->update($id, $product->name, $product->price, $product->images->first()->photo, $qtd);
+
+        $total_item = number_format($product->price * $qtd, 2, ',', '.');
+        $total_cart = number_format($cart->getTotal(), 2, ',', '.');
+        Session::set('cart', $cart);
+
+
+        return  Response::json(['item_id' => $id, 'total_item' => $total_item, 'total_cart' => $total_cart ], 200);
     }
 
     public function getCart()

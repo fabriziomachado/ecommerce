@@ -29,17 +29,22 @@
                             </td>
                             <td class="cart_description">
                                 <h4><a href="{{ route('product', ['id' => $k]) }}">{{ $item['name'] }}</a></h4>
-                                <p>Código: {{ $k  }}</p>
+
+                                <p>Código: {{ $k }}</p>
                             </td>
                             <td class="cart_price">R$ {{ number_format($item['price'], 2, ',', '.') }}</td>
-                            <td class="cart_quantity" width="50">
-                                {!! Form::text('qtd', $item['qtd'], ['class'=>'form-control', 'id'=>'qtd']) !!}</td>
+                            <td class="cart_quantity" width="80">
+                                {{-- Form::text('qtd', $item['qtd'], ['class'=>'form-control', 'id'=>'qtd', 'product-id' => $k]) --}}
+                                <input class="form-control" id="qtd" product-id="{{ $k }}" name="qtd" type="number"
+                                       value="{{ $item['qtd'] }}">
+                            </td>
                             <td class="cart_total">
                                 <p class="cart_total_price">
-                                    R$ {{  number_format($item['price'] *  $item['qtd'], 2, ',', '.')  }}</p>
+                                    R$ <span id="total_item_{{ $k }}">{{  number_format($item['price'] *  $item['qtd'], 2, ',', '.')  }}</span>
+                                </p>
                             </td>
                             <td class="cart_delete">
-                                <a href="{{ route('cart.destroy', ['id' => $k]) }}"
+                                <a href="{{ route('cart.destroy', ['id' => $k ]) }}"
                                    class="cart_quantity_delete">Deletar</a>
                             </td>
                         </tr>
@@ -52,7 +57,7 @@
                     <tr class="cart_menu">
                         <td colspan="6">
                             <div class="pull-right">
-                                <span>Total: R$ {{ number_format($cart->getTotal(), 2, ',', '.') }}</span>
+                                Total: R$ <span id="total_cart">{{ number_format($cart->getTotal(), 2, ',', '.') }}</span>
                                 <a href="#" class="btn btn-success">Checkout</a>
                             </div>
                         </td>
@@ -67,24 +72,8 @@
 
 @section('javascripts')
     @parent
-    <script>
-        ;(function($)
-        {
-            'use strict';
-            $(document).ready(function()
-            {
-                window.console.log('executado está!');
-                var $qtd = $('#qtd');
-                //    $categories = $('#categories'),
-                //    $users = $('#users');
-                //
-                //$owner.select2();
-                //$categories.select2();
-                //$users.select2();
-                window.console.log( $qtd.value() );
-
-            });
-        })(window.jQuery);
+    <script type="text/javascript">
+        //alert('examplo with section blade');
     </script>
 @stop
 

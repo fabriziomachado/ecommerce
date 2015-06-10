@@ -57,6 +57,63 @@
                     </span>
                 </div>
                 <!--/product-information-->
+<style>
+    .project_details {
+        padding: 0px;
+        margin: 70px 0px 0px 0px;
+    }
+    .project_details span {
+        padding: 5px 0px;
+        margin: 0px 0px 0px 0px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #454545;
+        float: left;
+        width: 100%;
+        border-bottom: 1px solid #e3e3e3;
+    }
+    .project_details strong {
+        padding: 0px 0px;
+        margin: 0px 0px 0px 0px;
+        font-size: 13px;
+        font-weight: bold;
+        color: #727272;
+        float: left;
+        width: 40%;
+    }
+    .project_details em {
+        padding: 0px 0px;
+        margin: 0px 0px 0px 0px;
+        font-size: 13px;
+        font-weight: normal;
+        font-style: normal;
+        color: #727272;
+        float: left;
+        width: 60%;
+    }
+    .project_details span a {
+        padding: 3px 10px;
+        margin: 0px 0px 0px 3px;
+        font-size: 11px;
+        line-height: 30px;
+        font-weight: normal;
+        font-style: normal;
+        color: #727272;
+        background-color: #e3e3e3;
+        border-radius:3px;
+    }
+    .project_details span a:hover {
+        background-color: #ddd;
+    }
+</style>
+                <div class="project_details">
+                    <h4>Project Details</h4>
+                    <span><strong>Date</strong> <em>18 December 2014</em></span>
+                    <span><strong>Categories</strong> <em><a href="#">Ecommerce</a> <a href="#">Wordpress</a> <a href="#">Woocommerce</a> <a href="#">OnlineStore</a> </em></span>
+                    <span><strong>Author</strong> <em>InvoInn Solution</em></span>
+                    <div class="clearfix margin_top5"></div>
+                    <a href="http://naturalhair.se/" class="but_goback"><i class="fa fa-hand-o-right fa-lg"></i> Visit Site</a>
+                </div>
 
                 <div class="product-tags">
 

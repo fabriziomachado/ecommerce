@@ -27,6 +27,7 @@ elixir(function(mix) {
         'jquery.scrollUp.min.js',
         'price-range.js',
         //'jquery.prettyPhoto.js',
+        'cart.js',
         'main.js'
     ], 'public/js/all.js');
 
@@ -34,5 +35,6 @@ elixir(function(mix) {
     mix.version(['css/all.css', 'js/all.js']);
 
     mix.copy('resources/assets/fonts', 'public/build/fonts');
+        //.copy('resources/assets/js/cart.js', 'public/build/cart.js');
 
 });

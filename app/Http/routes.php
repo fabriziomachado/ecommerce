@@ -60,6 +60,7 @@ Route::get('cart/destroy/{id}', ['as' => 'cart.destroy', 'uses' => 'CartControll
 
 Route::get('tag/{id}/products', ['as' => 'tag.products', 'uses' => 'StoreController@tag']);
 
+Route::get('cart/{id}/qtd/{qtd}', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 
 
 //Route::get('/', 'HomeController@index');
