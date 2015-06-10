@@ -56,8 +56,8 @@
                             <li><a href="#"><i class="fa fa-user"></i> Minha conta</a></li>
                             <li><a href="http://commerce.dev:10088/checkout"><i class="fa fa-crosshairs"></i>
                                     Checkout</a></li>
-                            <li><a href="http://commerce.dev:10088/cart"><i class="fa fa-shopping-cart"></i>
-                                    Carrinho</a></li>
+                            <li><a href="{{ route('cart')  }}"><i class="fa fa-shopping-cart"></i>
+                                    Cart</a></li>
                             <li><a href="http://commerce.dev:10088/auth/login"><i class="fa fa-lock"></i> Login</a></li>
                         </ul>
                     </div>
@@ -146,7 +146,12 @@
 <!--/Footer-->
 
 
-<script src="{{ elixir('js/all.js') }}"></script>
+
+
+@section('javascripts')
+    <script src="{{ elixir('js/all.js') }}"></script>
+@show
+
 
 </body>
 </html>
