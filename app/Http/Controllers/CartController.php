@@ -35,7 +35,9 @@ class CartController extends Controller
 
         $product = Product::find($id);
 
-        $cart->add($id, $product->name, $product->price, $product->images->first()->photo);
+        $photo = isset($product->images->first()->photo) ? $product->images->first()->photo :  'no-img.jpg';
+
+        $cart->add($id, $product->name, $product->price, $photo);
         Session::set('cart', $cart);
 
         return redirect()->route('cart');
@@ -55,7 +57,9 @@ class CartController extends Controller
         $cart = $this->getCart();
 
         $product = Product::find($id);
-        $cart->update($id, $product->name, $product->price, $product->images->first()->photo, $qtd);
+        $photo = isset($product->images->first()->photo) ? $product->images->first()->photo :  'no-img.jpg';
+
+        $cart->update($id, $product->name, $product->price, $photo, $qtd);
 
         $total_item = number_format($product->price * $qtd, 2, ',', '.');
         $total_cart = number_format($cart->getTotal(), 2, ',', '.');
