@@ -20,6 +20,7 @@ class ProductsController extends Controller
 
     public function __construct(Product $product)
     {
+//        $this->middleware('auth');
         $this->product = $product;
     }
 

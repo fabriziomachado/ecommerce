@@ -6,12 +6,17 @@ use CodeCommerce\Http\Controllers\Controller;
 use CodeCommerce\Models\Order;
 use CodeCommerce\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function place(Order $orderModel, OrderItem $orderItem)
     {
@@ -26,7 +31,7 @@ class CheckoutController extends Controller
 
             //DB::transaction( function(){})
 
-            $order = $orderModel->create([ 'user_id' => 1, 'total' => $cart->getTotal() ]);
+            $order = $orderModel->create([ 'user_id' => Auth::user()->id, 'total' => $cart->getTotal() ]);
 
             foreach ($cart->all() as $k => $item)
             {
