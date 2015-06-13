@@ -62,6 +62,8 @@ Route::get('tag/{id}/products', ['as' => 'tag.products', 'uses' => 'StoreControl
 
 Route::get('cart/{id}/qtd/{qtd}', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 
+Route::get('checkout/place-order', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+
 
 //Route::get('/', 'HomeController@index');
 //Route::get('example', 'WelcomeController@example');
