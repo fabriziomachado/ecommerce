@@ -3,6 +3,7 @@
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
 
+use CodeCommerce\Models\Category;
 use CodeCommerce\Models\Order;
 use CodeCommerce\Models\OrderItem;
 use Illuminate\Http\Request;
@@ -23,6 +24,9 @@ class CheckoutController extends Controller
         if (!Session::has('cart')) {
             return false;
         }
+
+        $categories = Category::all();
+
 
         $cart = Session::get('cart');
 
@@ -45,8 +49,15 @@ class CheckoutController extends Controller
             }
 
             //dd($order->items);
+            $cart->clear();
+
+
+
+            return view('store.checkout', compact('cart', 'order', 'categories'));
 
         }
+
+        return view('store.checkout', ['cart'=> 'empty', 'categories' => $categories ] );
     }
 
 }

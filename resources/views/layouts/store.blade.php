@@ -54,11 +54,22 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <li><a href="#"><i class="fa fa-user"></i> Minha conta</a></li>
-                            <li><a href="http://commerce.dev:10088/checkout"><i class="fa fa-crosshairs"></i>
+                            <li><a href="{{ route('checkout.place') }}"><i class="fa fa-crosshairs"></i>
                                     Checkout</a></li>
                             <li><a href="{{ route('cart')  }}"><i class="fa fa-shopping-cart"></i>
                                     Cart</a></li>
-                            <li><a href="http://commerce.dev:10088/auth/login"><i class="fa fa-lock"></i> Login</a></li>
+
+                            @if (Auth::guest())
+                                <li><a href="{{ url('/auth/login') }}"><i class="fa fa-lock"></i> Login</a></li>
+                            @else
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+                                    </ul>
+                                </li>
+                            @endif
+
                         </ul>
                     </div>
                 </div>
@@ -87,8 +98,8 @@
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="shop.html">Products</a></li>
                                     <li><a href="product-details.html">Product Details</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="{{ route('checkout.place') }}">Checkout</a></li>
+                                    <li><a href="{{ route('cart') }}">Cart</a></li>
                                     <li><a href="login.html">Login</a></li>
                                 </ul>
                             </li>

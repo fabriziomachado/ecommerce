@@ -67,7 +67,7 @@ Route::get('checkout/place-order', ['as' => 'checkout.place', 'uses' => 'Checkou
 
 //Route::get('/', 'HomeController@index');
 //Route::get('example', 'WelcomeController@example');
-//Route::get('home', 'HomeController@index');
+Route::get('home', 'StoreController@index');
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
