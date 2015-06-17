@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.store')
 
 @section('content')
     <h1>Categories</h1>

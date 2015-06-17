@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function() {
+Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function() {
 
     # Admin
     Route::group(['prefix'=>'admin', 'where'=>['id'=>'[0-9]+']], function(){

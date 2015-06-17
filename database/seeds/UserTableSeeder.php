@@ -16,7 +16,8 @@ class UserTableSeeder extends Seeder
         User::create([
             'name' => 'Fabrizio',
             'email' => 'fcm@unesc.net',
-            'password' => Hash::make('123')
+            'password' => Hash::make('123'),
+            'is_admin' => true
         ]);
 
 
@@ -24,7 +25,8 @@ class UserTableSeeder extends Seeder
             User::create([
                 'name' => $faker->firstName(),
                 'email' => $faker->email(),
-                'password' => Hash::make($faker->word())
+                'password' => Hash::make($faker->word()),
+                'is_admin' => false
             ]);
         }
     }

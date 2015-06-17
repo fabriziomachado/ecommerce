@@ -96,8 +96,8 @@
                             <li><a href="/" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="shop.html">Products</a></li>
-                                    <li><a href="product-details.html">Product Details</a></li>
+                                    <li><a href="{{ route('products.index') }}">Products</a></li>
+                                    <li><a href="{{ route('categories.index') }}">Categories</a></li>
                                     <li><a href="{{ route('checkout.place') }}">Checkout</a></li>
                                     <li><a href="{{ route('cart') }}">Cart</a></li>
                                     <li><a href="login.html">Login</a></li>
@@ -123,6 +123,13 @@
 
 <section>
     <div class="container">
+
+        @if (Session::has('message'))
+            <div class="alert alert-success" role="alert">
+                <p>{{ Session::get('message') }}</p>
+            </div>
+        @endif
+
         <div class="row">
 
             @yield('categories')
