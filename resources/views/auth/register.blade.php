@@ -35,6 +35,13 @@
 							</div>
 						</div>
 
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Address</label>
+                            <div class="col-md-6">
+                                <textarea type="text" class="form-control" name="address" value="{{ old('address') }}"></textarea>
+                            </div>
+                        </div>
+
 						<div class="form-group">
 							<label class="col-md-4 control-label">Password</label>
 							<div class="col-md-6">

@@ -11,14 +11,25 @@ class Order extends Model {
         'status'
     ];
 
+    public $statusList = [
+        0 => 'Pendente',
+        1 => 'Autorizado',
+        2 => 'Não Autorizado',
+    ];
+
 	public function items()
     {
         return $this->hasMany('CodeCommerce\Models\OrderItem');
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('CodeCommerce\User');
+    }
+
+    public function statusLabel()
+    {
+        return $this->statusList[$this->status];
     }
 
 }

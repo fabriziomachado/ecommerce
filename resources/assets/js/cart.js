@@ -19,3 +19,25 @@ $qtd.change(function () {
 
     });
 });
+
+
+var $order_id, $status_id = null;
+$("select[name='status']").change(function () {
+
+    $order_id = $(this).attr('order-id');
+    $status_id = $(this).val();
+
+    //alert('AQUI: ' + $order_id );
+    //alert('AQUI: ' + $status_id );
+
+    //if($val <= 1 ){
+    //    $val = 1;
+    //    $(this).val($val);
+    //}
+    $url = '/admin/orders/' + $order_id + '/status/' + $status_id;
+    //var $token = { _token: {{csrf_token()}} };
+
+    $.get($url, function ($data) {
+        alert($data.message);
+    });
+});

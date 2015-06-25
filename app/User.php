@@ -22,4 +22,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('CodeCommerce\Models\Order');
     }
 
+    public function profile()
+    {
+        return $this->hasOne('CodeCommerce\Profile');
+
+
+    }
+
 }

@@ -1,0 +1,1 @@
+Olá {{ $user->name }} seu pedido #{{ $order->id }} foi faturado com sucesso!

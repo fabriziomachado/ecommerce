@@ -26,6 +26,20 @@ function list_images_of($product)
 
     });
 
+}
 
+function status_of_order($status)
+{
+
+    switch ($status)
+    {
+        case 0:
+            return 'Pendente';
+        case 1:
+            return  'Autorizado';
+        case 2:
+            return 'Não Autorizado';
+
+    }
 
 }

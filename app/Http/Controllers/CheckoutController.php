@@ -1,5 +1,6 @@
 <?php namespace CodeCommerce\Http\Controllers;
 
+use CodeCommerce\Events\CheckoutEvent;
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
 
@@ -51,9 +52,10 @@ class CheckoutController extends Controller
             //dd($order->items);
             $cart->clear();
 
+            event(new CheckoutEvent(Auth::user(), $order));
 
-
-            return view('store.checkout', compact('cart', 'order', 'categories'));
+            //return view('store.checkout', compact('cart', 'order', 'categories'));
+            return redirect()->route('account.orders')->with('message', 'Order #'. $order->id  .' created with sucess');
 
         }
 

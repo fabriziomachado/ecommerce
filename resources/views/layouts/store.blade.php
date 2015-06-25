@@ -53,7 +53,7 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-user"></i> Minha conta</a></li>
+                            <li><a href="{{ route('account.orders') }}"><i class="fa fa-user"></i> Minha conta</a></li>
                             <li><a href="{{ route('checkout.place') }}"><i class="fa fa-crosshairs"></i>
                                     Checkout</a></li>
                             <li><a href="{{ route('cart')  }}"><i class="fa fa-shopping-cart"></i>
@@ -65,6 +65,8 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ url('/user/profile') }}">My Profile</a></li>
+                                        <li role="separator" class="divider"></li>
                                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                                     </ul>
                                 </li>
@@ -100,11 +102,10 @@
                                     <li><a href="{{ route('categories.index') }}">Categories</a></li>
                                     <li><a href="{{ route('checkout.place') }}">Checkout</a></li>
                                     <li><a href="{{ route('cart') }}">Cart</a></li>
-                                    <li><a href="login.html">Login</a></li>
                                 </ul>
                             </li>
 
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
                 </div>

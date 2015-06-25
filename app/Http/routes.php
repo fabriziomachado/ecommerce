@@ -46,6 +46,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth.admin'], function() 
             });
         });
 
+        Route::get('orders', ['as'=>'admin::orders.index', 'uses' => 'OrdersController@index']);
+        Route::put('update/{id}', ['as' => 'admin::orders.update', 'uses' => 'OrdersController@update']);
+        Route::get('orders/{id}/status/{status_id}', ['as'=>'admin::orders.update_status', 'uses' => 'OrdersController@update_status']);
+
     });
 
 });
@@ -62,7 +66,14 @@ Route::get('tag/{id}/products', ['as' => 'tag.products', 'uses' => 'StoreControl
 
 Route::get('cart/{id}/qtd/{qtd}', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 
-Route::get('checkout/place-order', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('checkout/place-order', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+    Route::get('account/orders', ['as' => 'account.orders', 'uses' => 'AccountController@orders']);
+
+});
+
+Route::get('user/profile', ['as'=>'user.profile', 'uses' => 'UserProfileController@show']);
 
 
 //Route::get('/', 'HomeController@index');
