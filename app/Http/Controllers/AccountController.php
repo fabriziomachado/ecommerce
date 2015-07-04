@@ -2,6 +2,7 @@
 
 use CodeCommerce\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class AccountController extends Controller {
 
@@ -14,6 +15,8 @@ class AccountController extends Controller {
 
     public function orders()
     {
+
+
         //$items = [];
         //$auth = $this->auth->User();
         $orders =  Auth::user()->orders; // $auth->orders()->orderBy('created_at', 'desc')->get();

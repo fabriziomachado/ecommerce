@@ -10,5 +10,6 @@
 
     <td>{{ number_format($order->total, 2, ',', '.') }}</td>
     <td>{{ $order->statuslabel() }}</</td>
+    <td>{{ $order->pagseguro_trans_id }}</</td>
 </tr>
 

@@ -11,6 +11,7 @@
                 <th>Itens</th>
                 <th>Total</th>
                 <th>Status</th>
+                <th>pagseguro id</th>
             </tr>
             </thead>
             <tbody>

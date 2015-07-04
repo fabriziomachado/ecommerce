@@ -75,6 +75,9 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::get('user/profile', ['as'=>'user.profile', 'uses' => 'UserProfileController@show']);
 
+Route::get('test', [ 'uses' => 'CheckoutController@test']);
+
+
 
 //Route::get('/', 'HomeController@index');
 //Route::get('example', 'WelcomeController@example');
