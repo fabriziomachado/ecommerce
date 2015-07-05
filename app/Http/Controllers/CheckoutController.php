@@ -36,7 +36,7 @@ class CheckoutController extends Controller
             //DB::transaction( function(){})
             $order = $orderModel->create(['user_id' => Auth::user()->id, 'total' => $cart->getTotal()]);
             $checkout->setReference($order->id);
-            $checkout->setRedirectTo("http://ecommerce.app/account/orders/". $order->id);
+            $checkout->setRedirectTo("http://ecommerce.app/account/orders/" . $order->id);
 
             foreach ($cart->all() as $k => $item) {
 
@@ -58,10 +58,6 @@ class CheckoutController extends Controller
 
 
             $response = $checkoutService->checkout($checkout->getCheckout());
-
-            //$pagseguro_trans_id = $response->getCode();
-            //$order->update(['pagseguro_trans_id' => $pagseguro_trans_id]);
-            ////dd($order);
 
 
             //return view('store.checkout', compact('cart', 'order', 'categories'));
@@ -88,14 +84,5 @@ class CheckoutController extends Controller
         return redirect($response->getRedirectionUrl());
 
     }
-
-
-//    public function transaction(Order $order)
-//    {
-//        $pagseguro_trans_id = Input::get('pagseguro_trans_id', false);
-//        echo($pagseguro_trans_id);
-//
-//        $order = $order->find()
-//    }
-
+    
 }
