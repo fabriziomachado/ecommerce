@@ -77,6 +77,7 @@ Route::get('user/profile', ['as'=>'user.profile', 'uses' => 'UserProfileControll
 
 Route::get('test', [ 'uses' => 'CheckoutController@test']);
 
+Route::post('checkout/notifications', ['as' => 'checkout.notifications', 'uses' => 'CheckoutController@notifications']);
 
 
 //Route::get('/', 'HomeController@index');

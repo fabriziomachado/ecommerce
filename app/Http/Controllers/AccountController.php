@@ -20,11 +20,16 @@ class AccountController extends Controller {
 
         $pagseguro_trans_id = Input::get('pagseguro_trans_id', false);
 
-        $transaction = $locator->getByCode($pagseguro_trans_id);
-        $orderId = $transaction->getDetails()->getReference();
+        if($pagseguro_trans_id)
+        {
 
-        $order = Order::find($orderId);
-        $order->update(['pagseguro_trans_id' => $pagseguro_trans_id]);
+            $transaction = $locator->getByCode($pagseguro_trans_id);
+            $orderId = $transaction->getDetails()->getReference();
+
+            $order = Order::find($orderId);
+            $order->update(['pagseguro_trans_id' => $pagseguro_trans_id]);
+        }
+
 
         //$items = [];
         //$auth = $this->auth->User();
