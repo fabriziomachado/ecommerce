@@ -1,0 +1,57 @@
+build_settings:
+  verbose: false
+  prefer_symlink: false
+
+setup:
+  env:
+    APP_ENV: "testing"
+  composer:
+    action: "install"
+    prefer_dist: false
+
+test:
+  php_parallel_lint:
+    ignore:
+      - vendor/
+      - _ide_helper.php
+  php_code_sniffer:
+    #standard: "/phpcs.xml"
+    #allowed_errors: 0
+    #allowed_warnings: -1 #unlimited
+    path: "app"
+    ignore:
+      - "app/views"
+      - "app/storage"
+      - "app/tests"
+      - "app/filters.php"
+      - "app/routes.php"
+    standard: "PSR1,PSR2"
+    allow_failures: true
+  php_docblock_checker:
+    path: "app"
+    allowed_warnings: 10
+    skip_classes: true    
+  php_mess_detector:
+    path: "app"
+    rules:
+      - "cleancode"
+      - "controversial"
+      - "codesize"
+      - "design"
+      - "naming"
+      - "unusedcode"
+    allow_failures: true
+    zero_config: true # do not make build as failed if something was detected
+  php_unit:
+    config:
+      - "phpunit.xml"
+    path: "tests/"
+
+failure:
+  email:
+    committer: true
+    default_mailto_address: fabrizio.machado@gmail.com
+
+complete:
+  email:
+    default_mailto_address: fabrizio.machado@gmail.com
